@@ -12,6 +12,16 @@ or
 
 Alternatively, one can clone / download this project and run the code locally.
 
+## Usage
+To create a file `dimensions/radius.dat` containing the value of a variable `r0`, run
+```python
+save(r0, 'radius', 'dimensions')
+```
+whereby the function signature with default arguments is given as:
+```python
+save(variable, name: str='variable', path: str=None) -> None
+```
+
 ## Examples
 Some use cases given a python file with
 ```python
@@ -49,6 +59,6 @@ to save...
 ## Usage in LaTeX
 To fetch the value in a LaTeX document, simply include the `.dat` file in math mode
 ```
-$\include{variables/variable.dat}$
+$\input{variables/variable.dat}$
 ```
 assuming the `.tex` file and the `variables/` folder share the same parent directory. 
