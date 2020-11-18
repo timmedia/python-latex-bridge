@@ -1,8 +1,19 @@
 # python-latex-bridge
-Python package to include python variables in a LaTeX document.
+Python package to include python variables in a LaTeX document, whereby the `pint` and `uncertainty` package are supported.
 
-## Example
-Some use cases given a file with
+## Installation
+As a user with sufficient permission run:
+
+    pip install python-latex-bridge
+
+or
+
+    python3 -m pip install python-latex-bridge
+
+Alternatively, one can clone / download this project and run the code locally.
+
+## Examples
+Some use cases given a python file with
 ```python
 from bridge import save
 from uncertainties import ufloat
@@ -10,25 +21,30 @@ from pint import UnitRegistry
 ureg = UnitRegistry()
 Q = ureg.Quantity
 ```
-- Any python value:
+to save...
+- any python variable:
     ```python
+    # creates `variables/variable.dat` containing "1024"
     x = 1024
-    save(x) # creates `variables/variable.dat` containing "1024"
+    save(x)
     ```
-- Uncertain value:
+- a value and its uncertainty:
     ```python
+    # creates `variables/height.dat` containing "3.10 \pm 0.20"
     x = ufloat(3.1, 0.2)
-    save(x, name='height') # creates `variables/height.dat` containing "3.10 \pm 0.20"
+    save(x, name='height')
     ```
-- Variable with unit
+- some variable with its unit using the [siunitex](https://ctan.org/pkg/siunitx) package:
     ```python
+    # creates `values/variable.dat` containing "42\,\si[]{\milli\meter}"
     x = Q(42, 'mm')
-    save(x, path='values') # creates `values/variable.dat` containing "42\,\si[]{\milli\meter}"
+    save(x, path='values')
     ```
-- Error and unit:
+- a combination of the aforementioned:
     ```python
+    # creates `variables/variable.dat` containing "(420 \pm 7)\,\si[]{\ohm}"
     x = Q(ufloat(420, 7), 'ohm')
-    save(x) # creates `variables/variable.dat` containing "(420 \pm 7)\,\si[]{\ohm}"
+    save(x)
     ```
 ## Usage in LaTeX
 To fetch the value in a LaTeX document, simply include the `.dat` file in math mode
